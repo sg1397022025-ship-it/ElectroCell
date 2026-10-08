@@ -1,39 +1,42 @@
-﻿namespace ElectroCell.Desktop
+﻿using System.Xml.Linq;
+namespace ElectroCell.Desktop
 {
-    partial class Form1
+    public partial class FormLogin : Form
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        public FormLogin()
         {
-            if (disposing && (components != null))
+            InitializeComponent();
+        }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            string usuario = txtUsuario.Text.Trim();
+            string contrasena = txtContrasena.Text;
+
+            if (string.IsNullOrWhiteSpace(usuario))
             {
-                components.Dispose();
+                MessageBox.Show("Ingrese su usuario.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUsuario.Focus();
+                return;
             }
-            base.Dispose(disposing);
+
+            if (string.IsNullOrWhiteSpace(contrasena))
+            {
+                MessageBox.Show("Ingrese su contraseña.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtContrasena.Focus();
+                return;
+            }
+
+            // TODO: aquí se conectará la autenticación real (base de datos / capa de negocio).
+            MessageBox.Show($"Bienvenido, {usuario}.", "Login",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+        private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            Close();
         }
-
-        #endregion
     }
 }
